@@ -32,9 +32,9 @@ public class Usuario {
     private String password;
 
     @Column(length = 50)
-    private String telefono; // opcional
+    private String telefono;
 
-    private LocalDate fechaNacimiento; // opcional
+    private LocalDate fechaNacimiento;
 
     @Column(length = 50)
     private String direccion;

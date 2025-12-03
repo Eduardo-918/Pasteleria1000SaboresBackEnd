@@ -12,11 +12,9 @@ public class FileStorageConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Obtener la ruta absoluta de la carpeta uploads
         Path uploadPath = Paths.get("uploads").toAbsolutePath().normalize();
         String uploadDir = "file:" + uploadPath.toString() + "/";
 
-        // Mapear /uploads/** a la carpeta física
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations(uploadDir);
 

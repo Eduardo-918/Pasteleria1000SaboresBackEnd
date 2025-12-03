@@ -18,21 +18,17 @@ public class UploadController {
             return ResponseEntity.badRequest().body("Archivo vacío");
         }
 
-        // Carpeta uploads (se crea si no existe)
         Path uploadDir = Paths.get("uploads");
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir);
         }
 
-        // Nombre único: timestamp + nombre original
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
         Path filePath = uploadDir.resolve(fileName);
 
-        // Guardar archivo
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-        // URL pública que usarás en los productos
         String url = "http://localhost:8080/uploads/" + fileName;
 
         return ResponseEntity.ok(url);

@@ -144,7 +144,6 @@ public class DataLoader {
             repository.save(p9);
             repository.save(p10);
 
-            // Verificación
             long total = repository.count();
             System.out.println(">>> ✅ TOTAL productos guardados: " + total);
 

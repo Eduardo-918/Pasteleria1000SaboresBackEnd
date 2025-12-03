@@ -52,7 +52,6 @@ public class UsuarioController {
     @PostMapping
     @Operation(summary = "Crea un nuevo usuario", description = "Crea un usuario a traves de un objeto JSON")
     public ResponseEntity<Usuario> save(@RequestBody Usuario usuario){
-        //Inicializamos
 
         String passwordEncriptada = passwordEncoder.encode(usuario.getPassword());
         usuario.setPassword(passwordEncriptada);
@@ -79,7 +78,6 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
         }
 
-        // Ahora sí generamos el token
         String token = jwtUtil.generarToken(usuario);
 
         return ResponseEntity.ok(new HashMap<>() {{
@@ -106,7 +104,6 @@ public class UsuarioController {
         existing.setFechaNacimiento(usuario.getFechaNacimiento());
         existing.setTipoUsuario(usuario.getTipoUsuario());
 
-        // Solo actualizar contraseña si se envió una nueva
         if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
             existing.setPassword(passwordEncoder.encode(usuario.getPassword()));
         }

@@ -21,7 +21,6 @@ public class ProductService {
         this.fileService = fileService;
     }
 
-    // Crear producto con imagen
     public product createProduct(String title,
                                  String description,
                                  String category,
@@ -29,10 +28,8 @@ public class ProductService {
                                  MultipartFile image) {
 
         try {
-            // Guardar archivo físico
             String fileName = fileService.saveFile(image);
 
-            // Construir URL pública
             String imageUrl = "http://localhost:8080/uploads/" + fileName;
 
             product product = new product();
@@ -49,18 +46,15 @@ public class ProductService {
         }
     }
 
-    // Obtener todos
     public List<product> findAll() {
         return repository.findAll();
     }
 
-    // Obtener por ID
     public product findById(long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
     }
 
-    // Eliminar producto
     public void deleteProduct(long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
